@@ -13,6 +13,12 @@ function formatCurrency(value) {
   return Number(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 }
 
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
 // ── Navigation ────────────────────────────────────────────
 
 document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -54,7 +60,7 @@ function renderMateriais() {
       m => `
     <tr>
       <td>${m.id}</td>
-      <td>${m.descricao}</td>
+      <td>${escapeHtml(m.descricao)}</td>
       <td>${formatCurrency(m.preco_compra)}</td>
       <td>${formatCurrency(m.preco_venda)}</td>
       <td>
@@ -152,7 +158,7 @@ function renderClientes() {
       c => `
     <tr>
       <td>${c.id}</td>
-      <td>${c.nome}</td>
+      <td>${escapeHtml(c.nome)}</td>
       <td>
         <button class="btn-edit" onclick="editCliente(${c.id})">Editar</button>
         <button class="btn-delete" onclick="deleteCliente(${c.id})">Excluir</button>

@@ -36,6 +36,9 @@ app.post('/api/materiais', (req, res) => {
 
 app.put('/api/materiais/:id', (req, res) => {
   const { descricao, preco_compra, preco_venda } = req.body;
+  if (!descricao || preco_compra == null || preco_venda == null) {
+    return res.status(400).json({ error: 'Campos obrigatórios: descricao, preco_compra, preco_venda' });
+  }
   const info = db
     .prepare('UPDATE materiais SET descricao = ?, preco_compra = ?, preco_venda = ? WHERE id = ?')
     .run(descricao, preco_compra, preco_venda, req.params.id);
@@ -71,6 +74,7 @@ app.post('/api/clientes', (req, res) => {
 
 app.put('/api/clientes/:id', (req, res) => {
   const { nome } = req.body;
+  if (!nome) return res.status(400).json({ error: 'Campo obrigatório: nome' });
   const info = db.prepare('UPDATE clientes SET nome = ? WHERE id = ?').run(nome, req.params.id);
   if (info.changes === 0) return res.status(404).json({ error: 'Cliente não encontrado' });
   res.json({ id: Number(req.params.id), nome });
