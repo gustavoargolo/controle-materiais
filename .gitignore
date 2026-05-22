@@ -1,0 +1,4 @@
+node_modules/
+controle.db
+*.db-wal
+*.db-shm
