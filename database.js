@@ -18,6 +18,17 @@ db.exec(`
     id   INTEGER PRIMARY KEY AUTOINCREMENT,
     nome TEXT    NOT NULL CHECK(length(nome) <= 60)
   );
+
+  CREATE TABLE IF NOT EXISTS vendas (
+    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    cliente_id    INTEGER NOT NULL REFERENCES clientes(id),
+    material_id   INTEGER NOT NULL REFERENCES materiais(id),
+    quantidade    INTEGER NOT NULL CHECK(quantidade > 0),
+    preco_unitario REAL   NOT NULL,
+    preco_custo    REAL   NOT NULL,
+    total          REAL   NOT NULL,
+    data           TEXT   NOT NULL DEFAULT (date('now'))
+  );
 `);
 
 module.exports = db;

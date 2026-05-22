@@ -246,6 +246,81 @@ tbody tr:hover {
   transform: translateY(0);
 }
 
+/* ── Select ────────────────────────────────────── */
+.form-group select {
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.form-group select:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.15);
+}
+
+/* ── DRE Cards ─────────────────────────────────── */
+.dre-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.dre-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-left: 4px solid #ccc;
+}
+
+.dre-card.receita {
+  border-left-color: #1a73e8;
+}
+
+.dre-card.custo {
+  border-left-color: #ea4335;
+}
+
+.dre-card.lucro {
+  border-left-color: #34a853;
+}
+
+.dre-card.info {
+  border-left-color: #fbbc04;
+}
+
+.dre-label {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.dre-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.dre-card.lucro .dre-value {
+  color: #34a853;
+}
+
+.dre-card.custo .dre-value {
+  color: #ea4335;
+}
+
+.dre-filtro {
+  margin-bottom: 0.5rem;
+}
+
 /* ── Responsive ────────────────────────────────── */
 @media (max-width: 600px) {
   .form-row {
