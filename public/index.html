@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Controle de Materiais</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── Navegação ────────────────────────────────── -->
+  <nav>
+    <h1>Controle de Materiais</h1>
+    <div class="nav-links">
+      <button class="nav-btn active" data-section="materiais">Materiais</button>
+      <button class="nav-btn" data-section="clientes">Clientes</button>
+      <button class="nav-btn" data-section="vendas">Vendas</button>
+      <button class="nav-btn" data-section="dre">DRE</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ══════════════ MATERIAIS ══════════════ -->
+    <section id="sec-materiais" class="section active">
+      <h2>Cadastro de Material</h2>
+
+      <form id="form-material">
+        <input type="hidden" id="mat-id" />
+        <div class="form-group">
+          <label for="mat-descricao">Descrição (até 100 caracteres)</label>
+          <input type="text" id="mat-descricao" maxlength="100" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mat-preco-compra">Preço de Compra (R$)</label>
+            <input type="number" id="mat-preco-compra" step="0.01" min="0" required />
+          </div>
+          <div class="form-group">
+            <label for="mat-preco-venda">Preço de Venda (R$)</label>
+            <input type="number" id="mat-preco-venda" step="0.01" min="0" required />
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-salvar-mat">Salvar</button>
+          <button type="button" id="btn-cancelar-mat" class="secondary" style="display:none">Cancelar</button>
+        </div>
+      </form>
+
+      <h2>Consulta de Materiais</h2>
+      <div class="search-bar">
+        <input type="text" id="busca-material" placeholder="Buscar por descrição..." />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Descrição</th>
+              <th>Preço Compra</th>
+              <th>Preço Venda</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-materiais"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ CLIENTES ══════════════ -->
+    <section id="sec-clientes" class="section">
+      <h2>Cadastro de Cliente</h2>
+
+      <form id="form-cliente">
+        <input type="hidden" id="cli-id" />
+        <div class="form-group">
+          <label for="cli-nome">Nome (até 60 caracteres)</label>
+          <input type="text" id="cli-nome" maxlength="60" required />
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="btn-salvar-cli">Salvar</button>
+          <button type="button" id="btn-cancelar-cli" class="secondary" style="display:none">Cancelar</button>
+        </div>
+      </form>
+
+      <h2>Consulta de Clientes</h2>
+      <div class="search-bar">
+        <input type="text" id="busca-cliente" placeholder="Buscar por nome..." />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-clientes"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ VENDAS ══════════════ -->
+    <section id="sec-vendas" class="section">
+      <h2>Registrar Venda</h2>
+
+      <form id="form-venda">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="venda-cliente">Cliente</label>
+            <select id="venda-cliente" required>
+              <option value="">Selecione o cliente...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="venda-material">Material</label>
+            <select id="venda-material" required>
+              <option value="">Selecione o material...</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="venda-quantidade">Quantidade</label>
+            <input type="number" id="venda-quantidade" min="1" step="1" required />
+          </div>
+          <div class="form-group">
+            <label for="venda-data">Data</label>
+            <input type="date" id="venda-data" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Preço Unitário (automático)</label>
+          <input type="text" id="venda-preco" readonly disabled />
+        </div>
+        <div class="form-actions">
+          <button type="submit">Registrar Venda</button>
+        </div>
+      </form>
+
+      <h2>Histórico de Vendas</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data</th>
+              <th>Cliente</th>
+              <th>Material</th>
+              <th>Qtd</th>
+              <th>Preço Unit.</th>
+              <th>Total</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-vendas"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ══════════════ DRE ══════════════ -->
+    <section id="sec-dre" class="section">
+      <h2>Demonstrativo de Resultado do Exercício (DRE)</h2>
+
+      <form id="form-dre-filtro" class="dre-filtro">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dre-inicio">Data Início</label>
+            <input type="date" id="dre-inicio" />
+          </div>
+          <div class="form-group">
+            <label for="dre-fim">Data Fim</label>
+            <input type="date" id="dre-fim" />
+          </div>
+          <div class="form-group" style="justify-content:flex-end">
+            <button type="submit">Filtrar</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="dre-cards">
+        <div class="dre-card receita">
+          <span class="dre-label">Receita Bruta</span>
+          <span class="dre-value" id="dre-receita">R$ 0,00</span>
+        </div>
+        <div class="dre-card custo">
+          <span class="dre-label">(-) Custo dos Produtos</span>
+          <span class="dre-value" id="dre-custo">R$ 0,00</span>
+        </div>
+        <div class="dre-card lucro">
+          <span class="dre-label">= Lucro Bruto</span>
+          <span class="dre-value" id="dre-lucro">R$ 0,00</span>
+        </div>
+        <div class="dre-card info">
+          <span class="dre-label">Total de Vendas</span>
+          <span class="dre-value" id="dre-total-vendas">0</span>
+        </div>
+      </div>
+
+      <h2>Resultado por Material</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Material</th>
+              <th>Qtd Vendida</th>
+              <th>Receita</th>
+              <th>Custo</th>
+              <th>Lucro</th>
+              <th>Margem</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-dre"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Toast ─────────────────────────────────── -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

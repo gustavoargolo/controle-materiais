@@ -1,0 +1,18 @@
+{
+  "name": "controle-materiais",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gustavo Argolo",
+  "license": "ISC",
+  "description": "Sistema de cadastro e controle de materiais e clientes",
+  "dependencies": {
+    "better-sqlite3": "^12.10.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
